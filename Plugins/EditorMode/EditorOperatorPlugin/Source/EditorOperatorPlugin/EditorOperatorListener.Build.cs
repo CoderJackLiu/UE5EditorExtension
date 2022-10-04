@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class EditorOperatorPlugin : ModuleRules
+public class EditorOperatorListener : ModuleRules
 {
-	public EditorOperatorPlugin(ReadOnlyTargetRules Target) : base(Target)
+	public EditorOperatorListener(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -41,11 +41,17 @@ public class EditorOperatorPlugin : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				"EditorSubsystem"
+				"EditorSubsystem",
+				"Projects",
+				"Blutility",
+				"DeveloperSettings",
+				"Settings",
+				"UMG", 
+				"UMGEditor"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
-		
+
 		
 		DynamicallyLoadedModuleNames.AddRange(
 			new string[]

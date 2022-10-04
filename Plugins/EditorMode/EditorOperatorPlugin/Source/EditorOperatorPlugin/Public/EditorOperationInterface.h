@@ -16,10 +16,38 @@ class UEditorOperationInterface : public UInterface
 /**
  * 
  */
-class EDITOROPERATORPLUGIN_API IEditorOperationInterface
+class EDITOROPERATORLISTENER_API IEditorOperationInterface
 {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	/*触发条件：编辑器：ContentBrowser资源或者世界大纲选中Actor变化*/
+	/** Called when actor In EditorWorld Or Assets In ContentBrowser selection changes */
+	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld")
+	void OnElementSelectionChanged(const UTypedElementSelectionSet* SelectionSet, bool bForceRefresh = false);
+
+	//触发条件：编辑器世界：添加Actor
+	//called when Actor been added into editor world
+	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld")
+	void OnActorAdded(AActor* InActor);
+
+	//触发条件：编辑器世界：Actor被移动
+	//called when Actor been moved in Editor world
+	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld")
+	void OnActorMoved(AActor* InActor);
+
+	//触发条件：编辑器世界：Actor被删除
+	//Called when Actor been deleted in editor world
+	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld")
+	void OnActorDeleted(AActor* InActor);
+
+	//触发条件：编辑器世界：多个Actor被移动
+	UFUNCTION(BlueprintImplementableEvent, Category="EditorOperation|EditorWorld")
+	void OnActorsMoved(TArray<AActor*>& InActors);
+
+	/* 触发条件：编辑器世界选中Actor变化 */
+	/** Called when actor selection changes */
+	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld&ContentBrowser")
+	void OnActorSelectionChanged(const TArray<UObject*>& NewSelection, bool bForceRefresh);
 };

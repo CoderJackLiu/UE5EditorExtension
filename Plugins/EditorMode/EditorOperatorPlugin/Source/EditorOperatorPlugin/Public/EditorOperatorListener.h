@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-class FEditorOperatorPluginModule : public IModuleInterface
+class FEditorOperatorListenerModule : public IModuleInterface
 {
 public:
 

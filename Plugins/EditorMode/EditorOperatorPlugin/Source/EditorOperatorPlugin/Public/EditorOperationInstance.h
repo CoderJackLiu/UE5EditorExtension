@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class EDITOROPERATORPLUGIN_API UEditorOperationInstance : public UObject
+class EDITOROPERATORLISTENER_API UEditorOperationInstance : public UObject
 {
 	GENERATED_BODY()
 };

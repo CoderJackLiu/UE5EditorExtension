@@ -4,11 +4,38 @@
 
 #include "Selection.h"
 #include "Editor.h"
+#include "EditorOperationInterface.h"
+#include "EditorOperationSetting.h"
+#include "EditorUtilitySubsystem.h"
+#include "EditorUtilityWidgetBlueprint.h"
+#include "ISettingsModule.h"
 #include "LevelEditor.h"
+#include "WidgetBlueprint.h"
+#include "UObject/ConstructorHelpers.h"
 #define LOCTEXT_NAMESPACE "FEditorOperatorPluginModule"
+
+void RegisterProjectSettings( ISettingsModule& SettingsModule )
+{
+	// general project settings
+	SettingsModule.RegisterSettings("Project", "Project", "General",
+		LOCTEXT("EditorOperationSettingsName", "EditorOperationSettings"),
+		LOCTEXT("EditorOperationSettingsDescription", "EditorOperation config files."),
+		GetMutableDefault<UEditorOperationSetting>()
+	);
+}
 
 void FEditorOperatorListenerModule::StartupModule()
 {
+
+	ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
+
+	if (SettingsModule != nullptr)
+	{
+		RegisterProjectSettings(*SettingsModule);
+	}
+	
+
+	//todo delete Test codes
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 
 	//用户选择的编辑器下的物体发生变化；也可以是世界大纲的，也可以是contentBrowser的
@@ -50,7 +77,12 @@ void FEditorOperatorListenerModule::StartupModule()
 	TArray<AActor*> SelectedActorsdd;
 	
 	GEditor->GetSelectedActors()->GetSelectedObjects<AActor>(SelectedActorsdd);
+
+
+
+	
 }
+
 
 void FEditorOperatorListenerModule::ShutdownModule()
 {
@@ -67,36 +99,36 @@ void FEditorOperatorListenerModule::CB_SelectedProps()
 void FEditorOperatorListenerModule::OnEditorSelectionChanged(UObject* NewSelection)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Selecte changed OnEditorSelectionChanged?"))
-	TArray<AActor*> SelectedActorsdd;
- 	GEditor->GetSelectedActors()->GetSelectedObjects<AActor>(SelectedActorsdd);
-
-	TArray<UObject*> Assets;
-	GEditor->GetSelectedObjects()->GetSelectedObjects<UObject>(Assets);
-
-	TArray<UObject*> SelectedActorsArray;
-	GEditor->GetSelectedActors()->GetSelectedObjects(UObject::StaticClass(), /*out*/ SelectedActorsArray);
-	if (USelection* SelectedObjects =GEditor->GetSelectedObjects())
-	{
-		for ( UObject* Object : Assets )
-		{
-			if ( SelectedObjects->IsSelected( Object ) )
-			{
-				SelectedObjects->DeselectAll(  );
-			}
-		}
-	}
-	
-
-	if ( USelection* SelectedActors = GEditor->GetSelectedActors() )
-	{
-		for ( AActor* Actor : SelectedActorsdd )
-		{
-			if ( SelectedActors->IsSelected( Actor ) )
-			{
-				SelectedActors->Deselect( Actor );
-			}
-		}
-	}
+	// TArray<AActor*> SelectedActorsdd;
+ // 	GEditor->GetSelectedActors()->GetSelectedObjects<AActor>(SelectedActorsdd);
+	//
+	// TArray<UObject*> Assets;
+	// GEditor->GetSelectedObjects()->GetSelectedObjects<UObject>(Assets);
+	//
+	// TArray<UObject*> SelectedActorsArray;
+	// GEditor->GetSelectedActors()->GetSelectedObjects(UObject::StaticClass(), /*out*/ SelectedActorsArray);
+	// if (USelection* SelectedObjects =GEditor->GetSelectedObjects())
+	// {
+	// 	for ( UObject* Object : Assets )
+	// 	{
+	// 		if ( SelectedObjects->IsSelected( Object ) )
+	// 		{
+	// 			SelectedObjects->DeselectAll(  );
+	// 		}
+	// 	}
+	// }
+	//
+	//
+	// if ( USelection* SelectedActors = GEditor->GetSelectedActors() )
+	// {
+	// 	for ( AActor* Actor : SelectedActorsdd )
+	// 	{
+	// 		if ( SelectedActors->IsSelected( Actor ) )
+	// 		{
+	// 			SelectedActors->Deselect( Actor );
+	// 		}
+	// 	}
+	// }
 }
 
 void FEditorOperatorListenerModule::OnActorAdded(AActor* InActor)
@@ -108,6 +140,38 @@ void FEditorOperatorListenerModule::OnActorAdded(AActor* InActor)
 void FEditorOperatorListenerModule::OnActorMoved(AActor* InActor)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Actor Moved!"))
+	FString UMGPath = UEditorOperationSetting::Get()->GetWidgetInstancePath();
+	const FSoftObjectPath BlueprintPath = FSoftObjectPath(UMGPath);
+	UObject* BlueprintObject = BlueprintPath.TryLoad();
+	UWidgetBlueprint* Blueprint = Cast<UWidgetBlueprint>(BlueprintObject);
+	// UEditorUtilityWidget* Blueprint = Cast<UEditorUtilityWidget>(BlueprintObject);
+	
+	if (!Blueprint || Blueprint->IsPendingKillOrUnreachable())
+	{
+		return;
+	}
+	
+	if (!Blueprint->GeneratedClass->IsChildOf(UEditorUtilityWidget::StaticClass()))
+	{
+		return;
+	}
+
+	UEditorUtilityWidgetBlueprint* EditorWidget = Cast<UEditorUtilityWidgetBlueprint>(Blueprint);
+	if (!EditorWidget)
+	{
+		return;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("UMG Class name is %s "),*EditorWidget->GetName())
+	// IEditorOperationInterface::Execute_OnActorMoved(EditorWidget,InActor);
+	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
+	check(EditorWidget);
+	FName TabId;
+	UEditorUtilityWidget* WidgetInstance =EditorUtilitySubsystem->SpawnAndRegisterTabAndGetID(EditorWidget,TabId);
+	if (WidgetInstance && WidgetInstance->GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
+	{
+		IEditorOperationInterface::Execute_OnActorMoved(WidgetInstance,InActor);
+
+	}
 
 }
 
@@ -119,7 +183,9 @@ void FEditorOperatorListenerModule::OnActorDeleted(AActor* InActor)
 
 void FEditorOperatorListenerModule::OnActorsMoved(TArray<AActor*>& InActors)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Selecte changed OnActorsChangedSomehow?"))
+	UE_LOG(LogTemp, Warning, TEXT("Selecte changed OnActorsMoved?"))
+
+
 }
 
 void FEditorOperatorListenerModule::OnElementSelectionChanged(const UTypedElementSelectionSet* SelectionSet, bool bForceRefresh)

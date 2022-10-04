@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="297b2df6-eb91-45d2-9027-e9fdd8dbc8a1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperationInstance.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperationInterface.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperationSetting.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperationSubsystem.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperatorListener.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationInstance.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationInterface.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationSetting.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationSubsystem.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperatorListener.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/StartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StartMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/EditorOperatorPlugin.uplugin" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/EditorOperatorListener.uplugin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/EditorOperatorPlugin.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/EditorOperatorListener.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperatorPlugin.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperatorPlugin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UEPluginsDev.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/UEPluginsDev.uproject" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2FfSQn8gceDZSO950JtnGft9X96" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1664881631343</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664881631343</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

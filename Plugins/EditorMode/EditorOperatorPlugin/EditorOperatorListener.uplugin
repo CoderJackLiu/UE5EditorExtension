@@ -16,7 +16,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "EditorOperatorPlugin",
+			"Name": "EditorOperatorListener",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
 		}
