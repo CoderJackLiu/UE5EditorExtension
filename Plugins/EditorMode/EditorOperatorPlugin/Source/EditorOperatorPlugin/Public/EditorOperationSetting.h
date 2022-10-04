@@ -28,8 +28,12 @@ private:
 
 	//
 	UPROPERTY(EditAnywhere, config, Category = Instance, meta = (MetaClass = "WidgetBlueprint", AllowPrivateAccess = "true"))
-	// TSoftObjectPtr<UEditorUtilityWidget> InstanceWidget;
 	FSoftObjectPath InstanceWidget;
+	
+	UPROPERTY(EditAnywhere, config, Category = Instance, meta = (DisplayName="复写实体",MetaClass = "LevelScriptActor", AllowPrivateAccess = "true"))
+	FSoftObjectPath LevelScriptInstance;
+
+
 	
 	UPROPERTY(EditAnywhere, config, Category = Rendering)
 	TSoftObjectPtr<UMaterialParameterCollection> MaterialParameterCollection;

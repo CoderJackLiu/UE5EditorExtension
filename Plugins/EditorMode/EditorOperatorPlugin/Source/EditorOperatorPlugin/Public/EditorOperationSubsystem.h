@@ -15,8 +15,8 @@
  * ④ 
  * ⑤
  */
-UCLASS()
-class EDITOROPERATORLISTENER_API UEditorOperationSubsystem : public UEditorSubsystem
+UCLASS(Blueprintable)
+class EDITOROPERATORLISTENER_API UEditorOperationSubsystem : public UEngineSubsystem
 {
 	GENERATED_BODY()
 
@@ -48,9 +48,11 @@ public:
 	//editor world operation functions
 	
 	//编辑器世界：添加Actor触发
+	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld")
 	void OnActorAdded(AActor* InActor);
 
 	//编辑器世界：Actor被移动
+	UFUNCTION(BlueprintImplementableEvent, Category="EditorOperation|EditorWorld")
 	void OnActorMoved(AActor* InActor);
 
 	//编辑器世界：Actor被删除 

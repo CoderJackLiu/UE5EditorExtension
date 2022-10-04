@@ -42,28 +42,43 @@ int32 UEditorOperationSubsystem::GetFunctionCallspace(UFunction* Function, FFram
 	return Super::GetFunctionCallspace(Function, Stack);
 }
 
-void UEditorOperationSubsystem::OnActorAdded(AActor* InActor)
+void UEditorOperationSubsystem::OnActorAdded_Implementation(AActor* InActor)
 {
-	// if (InActor&&InActor->GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
-	// {
-	// 	IEditorOperationInterface* TheInterface = Cast<IEditorOperationInterface>(InActor);
-	// 	if (TheInterface)
-	// 	{
-	// 		// TheInterface->Execute_OnActorAdded(InActor);
-	// 	}
-	// }
+	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"));
 }
 
-void UEditorOperationSubsystem::OnActorMoved(AActor* InActor)
-{
-}
+// void UEditorOperationSubsystem::OnActorAdded(AActor* InActor)
+// {
+// 	// if (InActor&&InActor->GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
+// 	// {
+// 	// 	IEditorOperationInterface* TheInterface = Cast<IEditorOperationInterface>(InActor);
+// 	// 	if (TheInterface)
+// 	// 	{
+// 	// 		// TheInterface->Execute_OnActorAdded(InActor);
+// 	// 	}
+// 	// }
+// 	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
+//
+// }
+
+// void UEditorOperationSubsystem::OnActorMoved(AActor* InActor)
+// {
+// 	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
+// 	if (GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
+// 	{
+// 		IEditorOperationInterface::Execute_OnActorMoved(this,InActor);
+// 	}
+// }
 
 void UEditorOperationSubsystem::OnActorDeleted(AActor* InActor)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
 }
 
 void UEditorOperationSubsystem::OnActorsMoved(TArray<AActor*>& InActors)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
+
 	const FString Path = UEditorOperationSetting::Get()->GetWidgetInstancePath();
 	TSubclassOf<UEditorUtilityWidget> ClassInstance = LoadClass<UEditorUtilityWidget>(nullptr, *Path);
 	if (ClassInstance && ClassInstance->ImplementsInterface(UEditorOperationInterface::StaticClass()))
@@ -77,4 +92,5 @@ void UEditorOperationSubsystem::OnActorsMoved(TArray<AActor*>& InActors)
 
 void UEditorOperationSubsystem::OnEditorSelectionChanged(UObject* NewSelection)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
 }

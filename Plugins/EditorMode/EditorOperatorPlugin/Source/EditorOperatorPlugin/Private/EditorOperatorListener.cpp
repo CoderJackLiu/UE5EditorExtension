@@ -144,7 +144,6 @@ void FEditorOperatorListenerModule::OnActorMoved(AActor* InActor)
 	const FSoftObjectPath BlueprintPath = FSoftObjectPath(UMGPath);
 	UObject* BlueprintObject = BlueprintPath.TryLoad();
 	UWidgetBlueprint* Blueprint = Cast<UWidgetBlueprint>(BlueprintObject);
-	// UEditorUtilityWidget* Blueprint = Cast<UEditorUtilityWidget>(BlueprintObject);
 	
 	if (!Blueprint || Blueprint->IsPendingKillOrUnreachable())
 	{
@@ -162,16 +161,16 @@ void FEditorOperatorListenerModule::OnActorMoved(AActor* InActor)
 		return;
 	}
 	UE_LOG(LogTemp, Warning, TEXT("UMG Class name is %s "),*EditorWidget->GetName())
-	// IEditorOperationInterface::Execute_OnActorMoved(EditorWidget,InActor);
-	UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
-	check(EditorWidget);
-	FName TabId;
-	UEditorUtilityWidget* WidgetInstance =EditorUtilitySubsystem->SpawnAndRegisterTabAndGetID(EditorWidget,TabId);
-	if (WidgetInstance && WidgetInstance->GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
-	{
-		IEditorOperationInterface::Execute_OnActorMoved(WidgetInstance,InActor);
-
-	}
+	// UEditorUtilitySubsystem* EditorUtilitySubsystem = GEditor->GetEditorSubsystem<UEditorUtilitySubsystem>();
+	// check(EditorWidget);
+	// FName TabId;
+	// UEditorUtilityWidget* WidgetInstance =EditorUtilitySubsystem->SpawnAndRegisterTabAndGetID(EditorWidget,TabId);
+	//
+	//
+	// if (WidgetInstance && WidgetInstance->GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
+	// {
+	// 	IEditorOperationInterface::Execute_OnActorMoved(WidgetInstance,InActor);
+	// }
 
 }
 
