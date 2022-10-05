@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "EditorUtilityWidget.h"
+#include "ILevelEditor.h"
 #include "Modules/ModuleManager.h"
 
 class FEditorOperatorListenerModule : public IModuleInterface
@@ -15,6 +16,8 @@ public:
 private:
 	void CB_SelectedProps();
 
+	void BindingEditorWorldOperations();
+	
 	//编辑器：选中ContentBrowser资源或者编辑器世界Actor发生变化
 	void OnEditorSelectionChanged(UObject* NewSelection);
 
@@ -45,7 +48,21 @@ private:
 	/** On level changed */
 	void OnMapChanged(UWorld* World, EMapChangeType MapChangeType);
 
+	/** On level Opened */
 	void OnMapOpened(const FString& Filename, bool bLoadAsTemplate);
+
+	void OnLevelEditorCreated(TSharedPtr<ILevelEditor> InLevelEditor);
+	
+	void OnRedrawLevelEditingViewports(bool bInvalidateHitProxies);
+
+	/** Called when viewport tab content changes. */
+	void OnTabContentChanged();
+
+	void OnComponentsEditedInWorld();
+	
+	/** Method for taking high res screen shots of viewports */
+	void TakeHighResScreenShot();
+
 
 
 private:

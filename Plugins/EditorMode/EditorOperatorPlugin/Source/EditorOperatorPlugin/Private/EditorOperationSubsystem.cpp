@@ -62,14 +62,6 @@ void UEditorOperationSubsystem::OnActorAdded_Implementation(AActor* InActor)
 //
 // }
 
-// void UEditorOperationSubsystem::OnActorMoved(AActor* InActor)
-// {
-// 	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
-// 	if (GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
-// 	{
-// 		IEditorOperationInterface::Execute_OnActorMoved(this,InActor);
-// 	}
-// }
 
 void UEditorOperationSubsystem::OnActorDeleted(AActor* InActor)
 {
