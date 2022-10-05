@@ -8,14 +8,6 @@
 
 UEditorOperationSubsystem::UEditorOperationSubsystem()
 {
-}
-
-void UEditorOperationSubsystem::Initialize(FSubsystemCollectionBase& Collection)
-{
-	Super::Initialize(Collection);
-	UEditorOperationSubsystem* EditorConfig = Collection.InitializeDependency<UEditorOperationSubsystem>();
-
-
 	//Editor world operation
 	{
 		//编辑器世界：Actor添加到世界绑定；
@@ -36,6 +28,15 @@ void UEditorOperationSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 		USelection::SelectionChangedEvent.AddUObject(this, &UEditorOperationSubsystem::OnEditorSelectionChanged);
 	}
 }
+
+// void UEditorOperationSubsystem::Initialize(FSubsystemCollectionBase& Collection)
+// {
+// 	Super::Initialize(Collection);
+// 	UEditorOperationSubsystem* EditorConfig = Collection.InitializeDependency<UEditorOperationSubsystem>();
+//
+//
+// 	
+// }
 
 int32 UEditorOperationSubsystem::GetFunctionCallspace(UFunction* Function, FFrame* Stack)
 {
@@ -72,25 +73,15 @@ void UEditorOperationSubsystem::OnActorAdded_Implementation(AActor* InActor)
 
 void UEditorOperationSubsystem::OnActorDeleted(AActor* InActor)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
+	UE_LOG(LogTemp, Warning, TEXT("Actor OnActorDeleted!"))
 }
 
 void UEditorOperationSubsystem::OnActorsMoved(TArray<AActor*>& InActors)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
-
-	const FString Path = UEditorOperationSetting::Get()->GetWidgetInstancePath();
-	TSubclassOf<UEditorUtilityWidget> ClassInstance = LoadClass<UEditorUtilityWidget>(nullptr, *Path);
-	if (ClassInstance && ClassInstance->ImplementsInterface(UEditorOperationInterface::StaticClass()))
-	{
-		if (auto Interface = Cast<IEditorOperationInterface>(ClassInstance))
-		{
-			Interface->OnActorsMoved(InActors);
-		}
-	}
+	UE_LOG(LogTemp, Warning, TEXT("Actor OnActorsMoved!"))
 }
 
 void UEditorOperationSubsystem::OnEditorSelectionChanged(UObject* NewSelection)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Actor Added!"))
+	UE_LOG(LogTemp, Warning, TEXT("OnEditorSelectionChanged!"))
 }

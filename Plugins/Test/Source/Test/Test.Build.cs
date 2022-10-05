@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class EditorOperatorListener : ModuleRules
+public class Test : ModuleRules
 {
-	public EditorOperatorListener(ReadOnlyTargetRules Target) : base(Target)
+	public Test(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -26,9 +26,6 @@ public class EditorOperatorListener : ModuleRules
 			new string[]
 			{
 				"Core",
-				"UnrealEd",
-				"LevelEditor",
-				"TypedElementRuntime"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -41,23 +38,10 @@ public class EditorOperatorListener : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
-		if (Target.bBuildEditor)
-		{
-			PublicDependencyModuleNames.AddRange(new string[]
-			{
-				"EditorSubsystem",
-				"Projects",
-				"Blutility",
-				"DeveloperSettings",
-				"Settings",
-				"UMG", 
-				"UMGEditor"
-			});
-		}
+		
 		
 		DynamicallyLoadedModuleNames.AddRange(
 			new string[]

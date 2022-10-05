@@ -42,10 +42,6 @@ public:
 	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld")
 	void OnActorDeleted(AActor* InActor);
 
-	//触发条件：编辑器世界：多个Actor被移动
-	UFUNCTION(BlueprintImplementableEvent, Category="EditorOperation|EditorWorld")
-	void OnActorsMoved(TArray<AActor*>& InActors);
-
 	/* 触发条件：编辑器世界选中Actor变化 */
 	/** Called when actor selection changes */
 	UFUNCTION(BlueprintNativeEvent, Category="EditorOperation|EditorWorld&ContentBrowser")

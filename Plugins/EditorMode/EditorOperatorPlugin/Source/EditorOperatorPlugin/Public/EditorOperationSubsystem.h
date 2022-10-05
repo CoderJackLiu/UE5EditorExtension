@@ -15,8 +15,8 @@
  * ④ 
  * ⑤
  */
-UCLASS(Blueprintable)
-class EDITOROPERATORLISTENER_API UEditorOperationSubsystem : public UEngineSubsystem
+UCLASS(abstract, Blueprintable, BlueprintType)
+class EDITOROPERATORLISTENER_API UEditorOperationSubsystem : public UObject
 {
 	GENERATED_BODY()
 
@@ -33,14 +33,14 @@ public:
 	 * Note: This function is called on the CDO prior to instances being created!
 	 *
 	 */
-	virtual bool ShouldCreateSubsystem(UObject* Outer) const override { return true; }
-
-	/** Implement this for initialization of instances of the system */
-	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
-
-
-	/** Implement this for deinitialization of instances of the system */
-	virtual void Deinitialize() override{};
+	// virtual bool ShouldCreateSubsystem(UObject* Outer) const override { return true; }
+	//
+	// /** Implement this for initialization of instances of the system */
+	// virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	//
+	//
+	// /** Implement this for deinitialization of instances of the system */
+	// virtual void Deinitialize() override{};
 
 	/** Overridden to check global network context */
 	virtual int32 GetFunctionCallspace(UFunction* Function, FFrame* Stack) override;
@@ -64,7 +64,5 @@ public:
 	
 	//编辑器：选中ContentBrowser资源或者编辑器世界Actor发生变化
 	void OnEditorSelectionChanged(UObject* NewSelection);
-	
-	
 	
 };

@@ -3,12 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EditorUtilityWidget.h"
 #include "Modules/ModuleManager.h"
 
 class FEditorOperatorListenerModule : public IModuleInterface
 {
 public:
-
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
@@ -27,20 +27,30 @@ private:
 	//编辑器世界：Actor被删除 
 	void OnActorDeleted(AActor* InActor);
 
-	//编辑器世界：多个Actor被移动
-	void OnActorsMoved(TArray<AActor*>& InActors);	
-
 	//编辑器：有Object被选中，EditorUtilityWidget除外(目前只发现这一种不会触发)
 	/** Called when element selection changes */
 	void OnElementSelectionChanged(const UTypedElementSelectionSet* SelectionSet, bool bForceRefresh = false);
 
-	
+
 	/** Called when actor selection changes */
 	void OnActorSelectionChanged(const TArray<UObject*>& NewSelection, bool bForceRefresh);
+
+	///////////////////////////////
 
 	/** Called to set property editors to show the given actors, even if those actors aren't in the current selection set */
 	void OnOverridePropertyEditorSelection(const TArray<AActor*>& NewSelection, bool bForceRefresh = false);
 
-	
+	////////////////////////////////////////////////
 
+	/** On level changed */
+	void OnMapChanged(UWorld* World, EMapChangeType MapChangeType);
+
+	void OnMapOpened(const FString& Filename, bool bLoadAsTemplate);
+
+
+private:
+	static bool bMapHasOpened;
+	static UEditorUtilityWidget* WidgetInstance;
+
+	UEditorUtilityWidget* GetWidgetInstance() const;
 };

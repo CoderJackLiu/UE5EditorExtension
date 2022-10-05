@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="297b2df6-eb91-45d2-9027-e9fdd8dbc8a1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/NewBlueprint.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/NewMap.umap" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/NewMap_HLODLayer_Instanced.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/NewMap_HLODLayer_Merged.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/2/8B/7PRCBO7QQKN3U39FV4YUGG.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/__ExternalActors__/NewMap/2/J7/QO5TQORWCXORVK1051S8GH.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.UEPluginsDev.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UEPluginsDev.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/NewBlueprint.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/NewBlueprint.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/StartMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StartMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperationSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperationSubsystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperatorListener.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Private/EditorOperatorListener.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationSetting.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationSetting.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/EditorMode/EditorOperatorPlugin/Source/EditorOperatorPlugin/Public/EditorOperationSubsystem.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
