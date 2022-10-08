@@ -21,46 +21,36 @@ bool FEditorOperatorListenerModule::bMapHasOpened = false;
 FLevelEditorModule& LevelEditorModule = FModuleManager::GetModuleChecked<FLevelEditorModule>("LevelEditor");
 
 
-void RegisterProjectSettings(ISettingsModule& SettingsModule)
+//注册projectSetting，扩展编辑器上的面板
+void RegisterProjectSettings()
 {
-	// general project settings
-	SettingsModule.RegisterSettings("Project", "Project", "General",
-	                                LOCTEXT("EditorOperationSettingsName", "EditorOperationSettings"),
-	                                LOCTEXT("EditorOperationSettingsDescription", "EditorOperation config files."),
-	                                GetMutableDefault<UEditorOperationSetting>()
-	);
+	ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
+	if (SettingsModule != nullptr)
+	{
+		// general project settings
+		SettingsModule->RegisterSettings("Project", "Project", "General",
+		                                 LOCTEXT("EditorOperationSettingsName", "EditorOperationSettings"),
+		                                 LOCTEXT("EditorOperationSettingsDescription", "EditorOperation config files."),
+		                                 GetMutableDefault<UEditorOperationSetting>()
+		);
+	}
 }
 
 void FEditorOperatorListenerModule::StartupModule()
 {
-	//注册projectSetting，扩展编辑器上的面板
-	ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
-	if (SettingsModule != nullptr)
-	{
-		RegisterProjectSettings(*SettingsModule);
-	}
+	
+	RegisterProjectSettings();
 
 	BindingEditorWorldOperations();
 
-	
 	//用户选择的编辑器下的物体发生变化；也可以是世界大纲的，也可以是contentBrowser的
 	USelection::SelectionChangedEvent.AddRaw(this, &FEditorOperatorListenerModule::OnEditorSelectionChanged);
-	
-	//获取世界大纲中选中的物体；
-	TArray<UObject*> SelectedActors;
-	GEditor->GetSelectedActors()->GetSelectedObjects(AActor::StaticClass(), /*out*/ SelectedActors);
-
-	//获取的选中的世界大纲中的Actors；
-	TArray<AActor*> SelectedActorsdd;
-
-	GEditor->GetSelectedActors()->GetSelectedObjects<AActor>(SelectedActorsdd);
-
-
 }
 
 
 void FEditorOperatorListenerModule::ShutdownModule()
 {
+	
 }
 
 void FEditorOperatorListenerModule::CB_SelectedProps()
@@ -69,7 +59,6 @@ void FEditorOperatorListenerModule::CB_SelectedProps()
 
 	//todo  restart the unreal editor
 	FUnrealEdMisc::Get().RestartEditor(false);
-	
 }
 
 void FEditorOperatorListenerModule::BindingEditorWorldOperations()
@@ -95,9 +84,8 @@ void FEditorOperatorListenerModule::BindingEditorWorldOperations()
 
 		//用户选择的编辑器下的物体发生变化；也可以是世界大纲的，也可以是contentBrowser的
 		FEditorDelegates::SelectedProps.AddRaw(this, &FEditorOperatorListenerModule::CB_SelectedProps);
-
 	}
-	
+
 
 	//关卡事件
 	{
@@ -106,7 +94,6 @@ void FEditorOperatorListenerModule::BindingEditorWorldOperations()
 
 		//关卡被打开
 		FEditorDelegates::OnMapOpened.AddRaw(this, &FEditorOperatorListenerModule::OnMapOpened);
-		
 	}
 
 	{
@@ -124,17 +111,63 @@ void FEditorOperatorListenerModule::BindingEditorWorldOperations()
 
 		//截图事件
 		LevelEditorModule.OnTakeHighResScreenShots().AddRaw(this, &FEditorOperatorListenerModule::TakeHighResScreenShot);
-
 	}
-
 }
+
+void FEditorOperatorListenerModule::BindingContentBrowserOperations()
+{
+	//Content Asset Operation
+	// LevelEditorModule.OnTabContentChanged()
+
+	//content Asset Operation
+	{
+		//Asset 创建
+		FEditorDelegates::OnNewAssetCreated.AddRaw(this, &FEditorOperatorListenerModule::HandleOnNewAssetCreate);
+		
+		//Asset 删除
+		FEditorDelegates::OnAssetsDeleted.AddRaw(this, &FEditorOperatorListenerModule::HandleOnAssetsDeleted);
+		
+		//Asset 删除前
+		FEditorDelegates::OnAssetsPreDelete.AddRaw(this, &FEditorOperatorListenerModule::OnAssetsPendingDelete);
+
+		//Asset 被拖拽
+		FEditorDelegates::OnAssetDragStarted.AddRaw(this, &FEditorOperatorListenerModule::OnAssetsBeenDrag);
+
+		//Asset 导入前
+		GEditor->GetEditorSubsystem<UImportSubsystem>()->OnAssetPreImport.AddRaw(this, &FEditorOperatorListenerModule::OnAssetPreImport);
+		
+		//Asset 导入中
+		GEditor->GetEditorSubsystem<UImportSubsystem>()->OnAssetPostImport.AddRaw(this, &FEditorOperatorListenerModule::OnAssetPostImport);
+		
+		//Asset 导入后
+		GEditor->GetEditorSubsystem<UImportSubsystem>()->OnAssetReimport.AddRaw(this, &FEditorOperatorListenerModule::OnAssetReimport);
+
+		//Package 删除结束
+		FEditorDelegates::OnPackageDeleted.AddRaw(this, &FEditorOperatorListenerModule::OnPackageDelete);
+	}
+}
+
+//PIE 事件绑定
+void FEditorOperatorListenerModule::BindingPIROperations()
+{
+	
+	FEditorDelegates::PreBeginPIE.AddRaw(this, &FEditorOperatorListenerModule::OnPIEStarted);
+		
+	FEditorDelegates::PausePIE.AddRaw(this, &FEditorOperatorListenerModule::OnPIEPaused);
+		
+	FEditorDelegates::ResumePIE.AddRaw(this, &FEditorOperatorListenerModule::OnPIEResumed);
+		
+	FEditorDelegates::EndPIE.AddRaw(this, &FEditorOperatorListenerModule::OnPIEStopped);
+		
+	FEditorDelegates::SingleStepPIE.AddRaw(this, &FEditorOperatorListenerModule::OnPIESingleStepped);
+}
+
 
 void FEditorOperatorListenerModule::OnEditorSelectionChanged(UObject* NewSelection)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Selecte changed OnEditorSelectionChanged?"))
 	TArray<AActor*> SelectedActorsdd;
 	GEditor->GetSelectedActors()->GetSelectedObjects<AActor>(SelectedActorsdd);
-	
 }
 
 void FEditorOperatorListenerModule::OnActorAdded(AActor* InActor)
@@ -170,7 +203,7 @@ void FEditorOperatorListenerModule::OnElementSelectionChanged(const UTypedElemen
 	UE_LOG(LogTemp, Warning, TEXT("Editor world Selecte changed OnElementSelectionChanged?"))
 	if (bMapHasOpened && GetWidgetInstance() && GetWidgetInstance()->GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
 	{
-		IEditorOperationInterface::Execute_OnElementSelectionChanged(GetWidgetInstance(), SelectionSet,bForceRefresh);
+		IEditorOperationInterface::Execute_OnElementSelectionChanged(GetWidgetInstance(), SelectionSet, bForceRefresh);
 	}
 }
 
@@ -179,7 +212,7 @@ void FEditorOperatorListenerModule::OnActorSelectionChanged(const TArray<UObject
 	UE_LOG(LogTemp, Warning, TEXT("Selecte changed OnActorSelectionChanged?"))
 	if (bMapHasOpened && GetWidgetInstance() && GetWidgetInstance()->GetClass()->ImplementsInterface(UEditorOperationInterface::StaticClass()))
 	{
-		IEditorOperationInterface::Execute_OnActorSelectionChanged(GetWidgetInstance(), NewSelection,bForceRefresh);
+		IEditorOperationInterface::Execute_OnActorSelectionChanged(GetWidgetInstance(), NewSelection, bForceRefresh);
 	}
 }
 
@@ -194,7 +227,6 @@ void FEditorOperatorListenerModule::OnMapChanged(UWorld* World, EMapChangeType M
 
 void FEditorOperatorListenerModule::OnLevelEditorCreated(TSharedPtr<ILevelEditor> InLevelEditor)
 {
-	
 }
 
 void FEditorOperatorListenerModule::OnRedrawLevelEditingViewports(bool bInvalidateHitProxies)
@@ -204,15 +236,77 @@ void FEditorOperatorListenerModule::OnRedrawLevelEditingViewports(bool bInvalida
 void FEditorOperatorListenerModule::OnTabContentChanged()
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnTabContentChanged"))
-
 }
 
 void FEditorOperatorListenerModule::OnComponentsEditedInWorld()
 {
-	
 }
 
 void FEditorOperatorListenerModule::TakeHighResScreenShot()
+{
+}
+
+void FEditorOperatorListenerModule::HandleOnAssetsDeleted(const TArray<UClass*>& DeletedAssetClasses)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnAssetsPendingDelete(const TArray<UObject*>& ObjectsForDelete)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnAssetsBeenDrag(const TArray<FAssetData>& AssetDatas, UActorFactory* Factory)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnPackageDelete(UPackage* ObjectForDelete)
+{
+	
+}
+
+void FEditorOperatorListenerModule::HandleOnNewAssetCreate(UFactory* NewAsset)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnAssetPreImport(UFactory* InFactory, UClass* InClass, UObject* InParent, const FName& Name, const TCHAR* Type)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnAssetPostImport(UFactory* InFactory, UObject* InCreatedObject)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnAssetReimport(UObject* InObject)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnPIEStarted(bool bSimulating)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnPIEPaused(bool bSimulating)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnPIEResumed(bool bSimulating)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnPIEStopped(bool bSimulating)
+{
+	
+}
+
+void FEditorOperatorListenerModule::OnPIESingleStepped(bool bSimulating)
 {
 	
 }
