@@ -23,6 +23,6 @@ FColor FCustomMeshActionBase::GetTypeColor() const
 uint32 FCustomMeshActionBase::GetCategories()
 {
 	// log
-		
-	return EAssetTypeCategories::Misc;
+			
+	return EAssetTypeCategories::UI;
 }
