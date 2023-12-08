@@ -19,7 +19,10 @@ public class CustomAssetEditor : ModuleRules
                 "CoreUObject",
                 "Engine",
                 "Slate",
-                "SlateCore"
+                "SlateCore", 
+                "CustomAsset",
+                "AssetTools",
+                "UnrealEd"
             }
         );
     }

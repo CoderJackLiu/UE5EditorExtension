@@ -18,6 +18,11 @@
 			"Name": "CustomAsset",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "CustomAssetEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	]
 }

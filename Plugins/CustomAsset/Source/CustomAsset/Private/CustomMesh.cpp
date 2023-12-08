@@ -1,8 +1,4 @@
-﻿$COPYRIGHT_LINE$
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-$MY_HEADER_INCLUDE_DIRECTIVE$
-
-
-
-
+#include "CustomMesh.h"
