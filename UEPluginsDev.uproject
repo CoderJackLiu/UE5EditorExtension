@@ -27,7 +27,7 @@
 				"Linux"
 			]
 		},{
-			"Name": "EditorOperatorPlugin",
+			"Name": "EditorOperatorListener",
 			"Enabled": false
 		}
 	]

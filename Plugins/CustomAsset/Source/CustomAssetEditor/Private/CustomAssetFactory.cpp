@@ -7,9 +7,14 @@
 
 UCustomAssetFactory::UCustomAssetFactory()
 {
+	ImportPriority = 200;
 	bCreateNew =true;
 	bEditAfterNew = true;
 	SupportedClass = UCustomMesh::StaticClass();
+	Formats.Empty();
+	Formats.Add(TEXT("fbx;FBX meshes and animations"));
+	Formats.Add(TEXT("obj;OBJ Static meshes"));
+	
 }
 
 UObject* UCustomAssetFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn)
@@ -18,4 +23,15 @@ UObject* UCustomAssetFactory::FactoryCreateNew(UClass* Class, UObject* InParent,
 
 
 	return  NewObject<UCustomMesh>(InParent, Class, Name, Flags| RF_Transactional);
+}
+
+UObject* UCustomAssetFactory::ImportObject(UClass* InClass, UObject* InOuter, FName InName, EObjectFlags Flags, const FString& Filename, const TCHAR* Parms, bool& OutCanceled)
+{
+	
+	return Super::ImportObject(InClass, InOuter, InName, Flags, Filename, Parms, OutCanceled);
+}
+
+bool UCustomAssetFactory::FactoryCanImport(const FString& Filename)
+{
+	return Super::FactoryCanImport(Filename);
 }
