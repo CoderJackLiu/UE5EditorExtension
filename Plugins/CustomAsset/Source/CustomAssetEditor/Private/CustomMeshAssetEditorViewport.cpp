@@ -9,10 +9,10 @@ void SCustomMeshAssetEditorViewport::Construct(const FArguments& InArgs)
 	SEditorViewport::Construct(SEditorViewport::FArguments());
 
 	PreviewScene->SetFloorVisibility(false);
-	PreviewScene->SetEnvironmentVisibility(false);
-	PreviewScene->SetSkyBrightness(0.0f);
+	PreviewScene->SetEnvironmentVisibility(true);
+	PreviewScene->SetSkyBrightness(1.0f);
 	PreviewScene->SetFloorOffset(-10000.0f);
-	PreviewScene->SetLightBrightness(0.0f);
+	PreviewScene->SetLightBrightness(0.6f);
 	
 }
 
