@@ -13,10 +13,9 @@ UCLASS()
 class CUSTOMASSET_API UCustomMesh : public UObject
 {
 	GENERATED_BODY()
-	
+
 public:
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CustomMesh")
 	FString MyAssetData;
-	
 };

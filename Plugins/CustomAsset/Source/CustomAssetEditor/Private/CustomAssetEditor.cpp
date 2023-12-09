@@ -8,16 +8,20 @@ void FCustomAssetEditorModule::StartupModule()
 {
 	IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
 	EAssetTypeCategories::Type Category = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("YourCategory")), LOCTEXT("YourCategory", "YourCategory"));
-	const TSharedRef<IAssetTypeActions> Action = MakeShareable(new FCustomMeshActionBase());
-	AssetTools.RegisterAssetTypeActions(Action);    
+	Action = MakeShareable(new FCustomMeshActionBase());
+	AssetTools.RegisterAssetTypeActions(Action.ToSharedRef());
 }
 
 void FCustomAssetEditorModule::ShutdownModule()
 {
-    //log
-			
+	//log
+	if (FModuleManager::Get().IsModuleLoaded("AssetTools"))
+	{
+		IAssetTools& AssetTools = FModuleManager::GetModuleChecked<FAssetToolsModule>("AssetTools").Get();
+		AssetTools.UnregisterAssetTypeActions(Action.ToSharedRef());
+	}
 }
 
 #undef LOCTEXT_NAMESPACE
-    
+
 IMPLEMENT_MODULE(FCustomAssetEditorModule, CustomAssetEditor)
