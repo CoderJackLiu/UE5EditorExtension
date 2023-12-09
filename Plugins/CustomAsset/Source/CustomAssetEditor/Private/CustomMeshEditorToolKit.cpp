@@ -5,6 +5,9 @@
 #include "Widgets/Images/SImage.h"
 #include "Framework/Docking/TabManager.h"
 #include "CustomMesh.h"
+#include "CustomMeshAssetEditorViewport.h"
+#include "CustomMeshEditorViewportClient.h"
+#include "EditorStyleSet.h"
 
 const FName CustomMeshEditorID(TEXT("CustomMeshEditor"));
 #define LOCTEXT_NAMESPACE "CustomMeshEditorToolKit"
@@ -13,7 +16,7 @@ TSharedRef<SDockTab> FCustomMeshEditorToolKit::SpawnTab_CustomMeshEditor(const F
 {
 	return SNew(SDockTab)
 	[
-		SNew(SImage)
+		SNew(SCustomMeshAssetEditorViewport)
 	];
 }
 

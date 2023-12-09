@@ -22,7 +22,7 @@ public class CustomAssetEditor : ModuleRules
                 "SlateCore", 
                 "CustomAsset",
                 "AssetTools",
-                "UnrealEd"
+                "UnrealEd", "AdvancedPreviewScene", "EditorStyle"
             }
         );
     }
