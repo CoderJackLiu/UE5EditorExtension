@@ -42,7 +42,7 @@ void FCustomMeshEditorToolKit::InitCustomMeshEditor(const EToolkitMode::Type Mod
 			->Split
 			(
 				FTabManager::NewStack()
-				->AddTab(CustomMeshEditorID, ETabState::OpenedTab)
+				->AddTab(CustomMeshEditorID, ETabState::SidebarTab)
 			)
 		);
 

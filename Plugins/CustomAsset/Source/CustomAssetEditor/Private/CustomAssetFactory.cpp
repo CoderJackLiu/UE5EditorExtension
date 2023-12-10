@@ -5,11 +5,13 @@
 
 #include "CustomMesh.h"
 
-UCustomAssetFactory::UCustomAssetFactory()
+UCustomAssetFactory::UCustomAssetFactory(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
+, AAA( TEXT("AAA") )
 {
 	ImportPriority = 200;
 	bCreateNew =true;
 	bEditAfterNew = true;
+	bEditorImport = true;
 	SupportedClass = UCustomMesh::StaticClass();
 	Formats.Empty();
 	Formats.Add(TEXT("fbx;FBX meshes and animations"));
@@ -33,5 +35,5 @@ UObject* UCustomAssetFactory::ImportObject(UClass* InClass, UObject* InOuter, FN
 
 bool UCustomAssetFactory::FactoryCanImport(const FString& Filename)
 {
-	return Super::FactoryCanImport(Filename);
+	return Filename.Contains(".fbx") || Filename.Contains(".obj");
 }

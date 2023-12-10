@@ -12,9 +12,8 @@
 UCLASS()
 class CUSTOMASSETEDITOR_API UCustomAssetFactory : public UFactory
 {
-	GENERATED_BODY()
+	GENERATED_UCLASS_BODY()
 public:
-	UCustomAssetFactory();
 
 	virtual UObject* FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn) override;
 
@@ -44,7 +43,7 @@ public:
 		return Formats;
 	}
 	
-	
+	FString AAA;
 };
 
 
