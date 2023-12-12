@@ -14,9 +14,16 @@ const FName CustomMeshEditorID(TEXT("CustomMeshEditor"));
 
 TSharedRef<SDockTab> FCustomMeshEditorToolKit::SpawnTab_CustomMeshEditor(const FSpawnTabArgs& SpawnTabArgs)
 {
+	TArray<UObject*> Objects = GetEditingObjects();
+	UCustomMesh* CustomMesh = nullptr;
+	if (Objects.Num())
+	{
+		CustomMesh = Cast<UCustomMesh>(Objects[0]);
+	}
 	return SNew(SDockTab)
 	[
 		SNew(SCustomMeshAssetEditorViewport)
+		.InCustomMesh(CustomMesh)
 	];
 }
 
@@ -34,7 +41,7 @@ void FCustomMeshEditorToolKit::UnregisterTabSpawners(const TSharedRef<FTabManage
 
 void FCustomMeshEditorToolKit::InitCustomMeshEditor(const EToolkitMode::Type Mode, const TSharedPtr<IToolkitHost>& InitToolkitHost, UCustomMesh* InitCustomMesh)
 {
-	const TSharedRef <FTabManager::FLayout> StandaloneDefaultLayout = FTabManager::NewLayout("Standalone_CustomMeshEditor_Layout")
+	const TSharedRef<FTabManager::FLayout> StandaloneDefaultLayout = FTabManager::NewLayout("Standalone_CustomMeshEditor_Layout")
 		->AddArea
 		(
 			FTabManager::NewPrimaryArea()
@@ -54,7 +61,6 @@ void FCustomMeshEditorToolKit::InitCustomMeshEditor(const EToolkitMode::Type Mod
 FName FCustomMeshEditorToolKit::GetToolkitFName() const
 {
 	return FName("SoundEffectPresetEditor");
-
 }
 
 FText FCustomMeshEditorToolKit::GetBaseToolkitName() const

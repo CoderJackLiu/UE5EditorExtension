@@ -15,7 +15,10 @@ class CUSTOMASSET_API UCustomMesh : public UObject
 	GENERATED_BODY()
 
 public:
-public:
+
+
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CustomMesh")
-	FString MyAssetData;
+	TObjectPtr<class UStaticMesh> StaticMesh;
+	
 };

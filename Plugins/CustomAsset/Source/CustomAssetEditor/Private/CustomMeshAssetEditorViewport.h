@@ -10,7 +10,7 @@ class SCustomMeshAssetEditorViewport:public SAssetEditorViewport, public FGCObje
 public:
 	SLATE_BEGIN_ARGS(SCustomMeshAssetEditorViewport)
 	{}
-	SLATE_ARGUMENT(TWeakPtr<UCustomMesh>, CustomMesh)
+	SLATE_ARGUMENT(TObjectPtr<UCustomMesh>, InCustomMesh)
 
 	SLATE_END_ARGS()
 
@@ -38,12 +38,11 @@ public:
 	/** Component for the preview static mesh. */
 	TArray<TObjectPtr<UStaticMeshComponent>> SocketPreviewMeshComponents;
 
-	// UPROPERTY(Transient)
-	TSharedPtr<UCustomMesh> CustomMesh;
+	TObjectPtr<UCustomMesh> CustomMesh;
 	
-	TSharedPtr<UCustomMesh> GetCustomMesh() const
+	UCustomMesh* GetCustomMesh() const
 	{
-		return CustomMesh;
+		return CustomMesh.Get();
 	}
 
 
@@ -76,7 +75,6 @@ private:
 	void SetPreviewMesh(UStaticMesh* InStaticMesh);
 
 
-
 	
 private:
 
@@ -97,4 +95,6 @@ private:
 	
 	// /** Handle to the registered OnPreviewFeatureLevelChanged delegate. */
 	// FDelegateHandle PreviewFeatureLevelChangedHandle;
+
+	
 };

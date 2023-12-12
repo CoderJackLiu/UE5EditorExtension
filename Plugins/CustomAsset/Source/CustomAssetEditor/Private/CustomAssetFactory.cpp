@@ -9,29 +9,35 @@
 UCustomAssetFactory::UCustomAssetFactory(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	ImportPriority = 101;
-	bCreateNew =true;
+	bCreateNew = true;
 	bEditAfterNew = true;
 	bEditorImport = true;
 	SupportedClass = UCustomMesh::StaticClass();
 	Formats.Empty();
 	Formats.Add(TEXT("fbx;FBX meshes and animations"));
 	Formats.Add(TEXT("obj;OBJ Static meshes"));
-	
 }
 
 UObject* UCustomAssetFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn)
 {
 	// Make sure we are trying to factory a skeleton, then create and init one
-
-
-	return  NewObject<UCustomMesh>(InParent, Class, Name, Flags| RF_Transactional);
+	UCustomMesh* Mesh = NewObject<UCustomMesh>(InParent, Class, Name, Flags | RF_Transactional);
+	if (StaticMesh)
+	{
+		Mesh->StaticMesh =Cast<UStaticMesh>(StaticMesh) ;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("FactoryCreateNew : StaticMesh is null"));
+	}
+	return Mesh;
 }
 
 UObject* UCustomAssetFactory::ImportObject(UClass* InClass, UObject* InOuter, FName InName, EObjectFlags Flags, const FString& Filename, const TCHAR* Parms, bool& OutCanceled)
 {
-	if (UFactory* Factory=GetFBXFactory())
+	if (UFactory* Factory = GetFBXFactory())
 	{
-		StaticMesh= Factory->ImportObject(InClass, InOuter, InName, Flags, Filename, Parms, OutCanceled);
+		StaticMesh = Factory->ImportObject(InClass, InOuter, InName, Flags, Filename, Parms, OutCanceled);
 	}
 	//log
 	UE_LOG(LogTemp, Warning, TEXT("ImportObject : %s"), StaticMesh? TEXT("true"): TEXT("false"));
@@ -54,18 +60,18 @@ UFactory* UCustomAssetFactory::GetFBXFactory()
 UFactory* UCustomAssetFactory::GetFactoryInstanceByName(const FString& ClassName)
 {
 	// 查找类
-	UClass* FactoryClass=nullptr;
-	for(TObjectIterator<UClass> ClassIt; ClassIt; ++ClassIt)
+	UClass* FactoryClass = nullptr;
+	for (TObjectIterator<UClass> ClassIt; ClassIt; ++ClassIt)
 	{
-		if(!(*ClassIt)->IsChildOf(UFactory::StaticClass()) || ((*ClassIt)->HasAnyClassFlags(CLASS_Abstract)) || (*ClassIt)->IsChildOf(USceneImportFactory::StaticClass()))
+		if (!(*ClassIt)->IsChildOf(UFactory::StaticClass()) || ((*ClassIt)->HasAnyClassFlags(CLASS_Abstract)) || (*ClassIt)->IsChildOf(USceneImportFactory::StaticClass()))
 		{
 			continue;
 		}
-		FString SourceClassName=*ClassIt->GetName();
+		FString SourceClassName = *ClassIt->GetName();
 		//log
 		UE_LOG(LogTemp, Warning, TEXT("GetFactoryInstanceByName : %s"), *SourceClassName);
 		//const UObject* Factory = Cast<UObject>((*ClassIt)->GetDefaultObject());
-	
+
 		if (SourceClassName.Equals(ClassName))
 		{
 			UClass* Class = *ClassIt;

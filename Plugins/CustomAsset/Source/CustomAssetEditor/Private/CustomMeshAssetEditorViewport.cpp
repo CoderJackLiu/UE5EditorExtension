@@ -1,10 +1,11 @@
 ﻿#include "CustomMeshAssetEditorViewport.h"
 
+#include "CustomMesh.h"
 #include "CustomMeshEditorViewportClient.h"
 
 void SCustomMeshAssetEditorViewport::Construct(const FArguments& InArgs)
 {
-	CustomMesh = InArgs._CustomMesh.Pin();
+	CustomMesh = InArgs._InCustomMesh.Get();
 
 	SEditorViewport::Construct(SEditorViewport::FArguments());
 
@@ -13,12 +14,14 @@ void SCustomMeshAssetEditorViewport::Construct(const FArguments& InArgs)
 	PreviewScene->SetSkyBrightness(1.0f);
 	PreviewScene->SetFloorOffset(-10000.0f);
 	PreviewScene->SetLightBrightness(0.6f);
-	
+	if (CustomMesh)
+	{
+		SetPreviewMesh(CustomMesh->StaticMesh.Get());
+	}
 }
 
-SCustomMeshAssetEditorViewport::SCustomMeshAssetEditorViewport(): PreviewScene(MakeShareable(new FAdvancedPreviewScene(FPreviewScene::ConstructionValues())))
+SCustomMeshAssetEditorViewport::SCustomMeshAssetEditorViewport(): PreviewScene(MakeShareable(new FAdvancedPreviewScene(FPreviewScene::ConstructionValues()))), CurrentViewMode(VMI_Wireframe/*VMI_Lit*/)
 {
-	
 }
 
 SCustomMeshAssetEditorViewport::~SCustomMeshAssetEditorViewport()
@@ -34,6 +37,8 @@ SCustomMeshAssetEditorViewport::~SCustomMeshAssetEditorViewport()
 
 void SCustomMeshAssetEditorViewport::AddReferencedObjects(FReferenceCollector& Collector)
 {
+	Collector.AddReferencedObject(StaticMesh);
+	Collector.AddReferencedObject(PreviewMeshComponent);
 }
 
 void SCustomMeshAssetEditorViewport::UpdatePreviewSocketMeshes()
@@ -59,5 +64,21 @@ TSharedRef<FEditorViewportClient> SCustomMeshAssetEditorViewport::MakeEditorView
 
 void SCustomMeshAssetEditorViewport::SetPreviewMesh(UStaticMesh* InStaticMesh)
 {
-	
+	StaticMesh = InStaticMesh;
+	if (PreviewMeshComponent)
+	{
+		PreviewScene->RemoveComponent(PreviewMeshComponent);
+		PreviewMeshComponent = NULL;
+	}
+	PreviewMeshComponent = NewObject<UStaticMeshComponent>();
+	const ERHIFeatureLevel::Type FeatureLevel = GEditor->PreviewPlatform.GetEffectivePreviewFeatureLevel();
+	if ( FeatureLevel <= ERHIFeatureLevel::ES3_1)
+	{
+		PreviewMeshComponent->SetMobility(EComponentMobility::Static);
+	}
+	PreviewMeshComponent->SetStaticMesh(StaticMesh);
+	PreviewScene->AddComponent(PreviewMeshComponent,FTransform::Identity);
+	PreviewMeshComponent->SetCollisionProfileName(UCollisionProfile::NoCollision_ProfileName);
+
+
 }
