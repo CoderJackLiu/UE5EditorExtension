@@ -33,6 +33,7 @@ uint32 FCustomMeshActionBase::GetCategories()
 	return EAssetTypeCategories::UI;
 }
 
+
 void FCustomMeshActionBase::OpenAssetEditor(const TArray<UObject*>& InObjects, const EAssetTypeActivationOpenedMethod OpenedMethod, TSharedPtr<IToolkitHost> EditWithinLevelEditor)
 {
 	EToolkitMode::Type Mode = EditWithinLevelEditor.IsValid() ? EToolkitMode::WorldCentric : EToolkitMode::Standalone;

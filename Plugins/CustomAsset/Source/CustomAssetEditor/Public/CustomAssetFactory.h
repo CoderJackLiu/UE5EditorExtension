@@ -43,7 +43,12 @@ public:
 		return Formats;
 	}
 	
-	FString AAA;
+	//static mesh
+	UPROPERTY(Transient)
+	UObject* StaticMesh;
+	
+	static UFactory* GetFBXFactory() ;
+	static UFactory* GetFactoryInstanceByName(const FString& ClassName) ;
 };
 
 
