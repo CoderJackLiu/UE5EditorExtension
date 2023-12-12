@@ -4,16 +4,22 @@
 #include "CustomMeshThumbnail.h"
 
 #include "CustomMesh.h"
+#include "RenderingThread.h"
 #include "ThumbnailHelpers.h"
 
 
 void UCustomMeshThumbnail::Draw(UObject* Object, int32 X, int32 Y, uint32 Width, uint32 Height, FRenderTarget* RenderTarget, FCanvas* Canvas, bool bAdditionalViewFamily)
 {
 	const UCustomMesh* CustomMesh = Cast<UCustomMesh>(Object);
-	if (CustomMesh && CustomMesh->GetStaticMesh())
+	if (CustomMesh && IsValid(CustomMesh->GetStaticMesh()))
 	{
-		if (ThumbnailScene == nullptr)
+		if (ThumbnailScene == nullptr|| ensure(ThumbnailScene->GetWorld() != nullptr) == false)
 		{
+			if (ThumbnailScene)
+			{
+				FlushRenderingCommands();
+				delete ThumbnailScene;
+			}
 			ThumbnailScene = new FStaticMeshThumbnailScene();
 		}
 
@@ -30,7 +36,6 @@ void UCustomMeshThumbnail::Draw(UObject* Object, int32 X, int32 Y, uint32 Width,
 
 		RenderViewFamily(Canvas, &ViewFamily, ThumbnailScene->CreateView(&ViewFamily, X, Y, Width, Height));
 		ThumbnailScene->SetStaticMesh(nullptr);
-		ThumbnailScene->SetOverrideMaterials(TArray<class UMaterialInterface*>());
 	}
 }
 

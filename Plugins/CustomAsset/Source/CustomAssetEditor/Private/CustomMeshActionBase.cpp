@@ -6,6 +6,7 @@
 #include "CanvasTypes.h"
 #include "CustomMesh.h"
 #include "CustomMeshEditorToolKit.h"
+#include "ThumbnailRendering/SceneThumbnailInfo.h"
 
 TSharedPtr<SWidget> FCustomMeshActionBase::GetThumbnailOverlay(const FAssetData& AssetData) const
 {
@@ -41,6 +42,11 @@ EThumbnailPrimType FCustomMeshActionBase::GetDefaultThumbnailPrimitiveType(UObje
 	return EThumbnailPrimType::TPT_MAX;
 }
 
+TArray<FAssetData> FCustomMeshActionBase::GetValidAssetsForPreviewOrEdit(TArrayView<const FAssetData> InAssetDatas, bool bIsPreview)
+{
+	return FAssetTypeActions_Base::GetValidAssetsForPreviewOrEdit(InAssetDatas, bIsPreview);
+}
+
 FText FCustomMeshActionBase::GetName() const
 {
 	return NSLOCTEXT("AssetTypeActions", "AssetTypeActions_MyCustomMeshAsset", "Custom Mesh Asset");
@@ -61,6 +67,12 @@ uint32 FCustomMeshActionBase::GetCategories()
 	// log
 
 	return EAssetTypeCategories::UI;
+}
+
+UThumbnailInfo* FCustomMeshActionBase::GetThumbnailInfo(UObject* Asset) const
+{
+	UCustomMesh* Outer = CastChecked<UCustomMesh>(Asset);
+	return NewObject<USceneThumbnailInfo>(Outer, NAME_None, RF_Transactional);
 }
 
 
