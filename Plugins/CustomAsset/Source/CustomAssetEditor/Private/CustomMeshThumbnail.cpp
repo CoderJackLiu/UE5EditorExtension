@@ -37,7 +37,8 @@ void UCustomMeshThumbnail::Draw(UObject* Object, int32 X, int32 Y, uint32 Width,
 bool UCustomMeshThumbnail::CanVisualizeAsset(UObject* Object)
 {
 	const UCustomMesh* CustomMesh = Cast<UCustomMesh>(Object);
-	return CustomMesh && CustomMesh->GetStaticMesh();
+	// return CustomMesh && CustomMesh->GetStaticMesh();
+	return true;
 }
 
 void UCustomMeshThumbnail::BeginDestroy()

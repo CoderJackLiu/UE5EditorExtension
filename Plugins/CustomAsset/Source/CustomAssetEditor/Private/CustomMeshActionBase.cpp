@@ -3,13 +3,43 @@
 
 #include "CustomMeshActionBase.h"
 
+#include "CanvasTypes.h"
 #include "CustomMesh.h"
 #include "CustomMeshEditorToolKit.h"
-	
-// TSharedPtr<SWidget> FCustomMeshActionBase::GetThumbnailOverlay(const FAssetData& AssetData) const
-// {
-// 	return SNew(SImage).Image(FAppStyle::GetBrush("NoBrush"));
-// }
+
+TSharedPtr<SWidget> FCustomMeshActionBase::GetThumbnailOverlay(const FAssetData& AssetData) const
+{
+	// FTextureRenderTargetResource* ThumbnailRTResource=nullptr;
+	//
+	// FThumbnailRenderingInfo* RenderingInfo = UThumbnailManager::Get().GetRenderingInfo(AssetData.GetAsset());
+	// if (RenderingInfo != nullptr)
+	// {
+	// 	if (RenderingInfo->Renderer)
+	// 	{
+	// 		// RenderingInfo->Renderer->Draw(AssetData.GetAsset(), 0, 0, 128, 128, nullptr, nullptr, false);
+	// 		// Re-render
+	// 		FCanvas ThumbnailCanvas(ThumbnailRTResource, nullptr, nullptr, ERHIFeatureLevel::Type::SM5, FCanvas::CDM_DeferDrawing, 1.0f);
+	// 		RenderingInfo->Renderer->Draw(AssetData.GetAsset(), 0, 0, 128, 128, ThumbnailRTResource, &ThumbnailCanvas, false);
+	// 		
+	// 		ENQUEUE_RENDER_COMMAND(TransitionThumbnail_RT)
+	// 		(
+	// 			[RenderTargetResource=ThumbnailRTResource](FRHICommandListImmediate& RHICmdList)
+	// 			{
+	// 				RHICmdList.Transition(FRHITransitionInfo(RenderTargetResource->GetRenderTargetTexture(), ERHIAccess::RTV, ERHIAccess::SRVMask));
+	// 			}
+	// 		);
+	// 		return SNew(SImage);//.Image(ThumbnailRTResource);
+	//
+	// 	}
+	// }
+	AssetData.GetAsset();
+	return SNew(SImage).Image(FAppStyle::GetBrush("NoBrush"));
+}
+
+EThumbnailPrimType FCustomMeshActionBase::GetDefaultThumbnailPrimitiveType(UObject* Asset) const
+{
+	return EThumbnailPrimType::TPT_MAX;
+}
 
 FText FCustomMeshActionBase::GetName() const
 {
@@ -29,7 +59,7 @@ FColor FCustomMeshActionBase::GetTypeColor() const
 uint32 FCustomMeshActionBase::GetCategories()
 {
 	// log
-			
+
 	return EAssetTypeCategories::UI;
 }
 
@@ -37,14 +67,13 @@ uint32 FCustomMeshActionBase::GetCategories()
 void FCustomMeshActionBase::OpenAssetEditor(const TArray<UObject*>& InObjects, const EAssetTypeActivationOpenedMethod OpenedMethod, TSharedPtr<IToolkitHost> EditWithinLevelEditor)
 {
 	EToolkitMode::Type Mode = EditWithinLevelEditor.IsValid() ? EToolkitMode::WorldCentric : EToolkitMode::Standalone;
-	for(auto InObj=InObjects.CreateConstIterator(); InObj; ++InObj)
+	for (auto InObj = InObjects.CreateConstIterator(); InObj; ++InObj)
 	{
 		UCustomMesh* CustomMesh = Cast<UCustomMesh>(*InObj);
-		if(CustomMesh != nullptr)
+		if (CustomMesh != nullptr)
 		{
 			TSharedRef<FCustomMeshEditorToolKit> CustomMeshEditorToolKit = MakeShareable(new FCustomMeshEditorToolKit());
 			CustomMeshEditorToolKit->InitCustomMeshEditor(Mode, EditWithinLevelEditor, CustomMesh);
 		}
 	}
-	
 }

@@ -26,6 +26,10 @@ void FCustomAssetEditorModule::ShutdownModule()
 		IAssetTools& AssetTools = FModuleManager::GetModuleChecked<FAssetToolsModule>("AssetTools").Get();
 		AssetTools.UnregisterAssetTypeActions(Action.ToSharedRef());
 	}
+	if (UObjectInitialized())
+	{
+		UThumbnailManager::Get().UnregisterCustomRenderer(UCustomMesh::StaticClass());
+	}
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -25,6 +25,7 @@ class CUSTOMASSETEDITOR_API UCustomMeshThumbnail : public UDefaultSizedThumbnail
 	virtual bool CanVisualizeAsset(UObject* Object) override;
 	// UObject implementation
 	virtual void BeginDestroy() override;
+	virtual EThumbnailRenderFrequency GetThumbnailRenderFrequency(UObject* Object) const override { return EThumbnailRenderFrequency::Realtime; }
 
 private:
 	class FStaticMeshThumbnailScene* ThumbnailScene;
