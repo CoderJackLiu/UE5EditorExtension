@@ -16,12 +16,15 @@ void SCustomMeshAssetEditorViewport::Construct(const FArguments& InArgs)
 	PreviewScene->SetLightBrightness(0.6f);
 	if (CustomMesh)
 	{
-		SetPreviewMesh(CustomMesh->StaticMesh.Get());
+		SetPreviewMesh(CustomMesh->GetStaticMesh());
 	}
 }
 
 SCustomMeshAssetEditorViewport::SCustomMeshAssetEditorViewport(): PreviewScene(MakeShareable(new FAdvancedPreviewScene(FPreviewScene::ConstructionValues()))), CurrentViewMode(VMI_Wireframe/*VMI_Lit*/)
 {
+	//log
+	UE_LOG( LogTemp, Warning, TEXT( "SCustomMeshAssetEditorViewport::SCustomMeshAssetEditorViewport()" ) );
+	
 }
 
 SCustomMeshAssetEditorViewport::~SCustomMeshAssetEditorViewport()

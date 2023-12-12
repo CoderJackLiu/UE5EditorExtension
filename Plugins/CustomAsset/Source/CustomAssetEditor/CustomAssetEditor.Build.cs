@@ -9,7 +9,7 @@ public class CustomAssetEditor : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core",
+                "Core", "UnrealEd",
             }
         );
 

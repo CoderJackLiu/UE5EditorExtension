@@ -20,7 +20,7 @@ FCustomMeshEditorViewportClient::FCustomMeshEditorViewportClient(const TSharedRe
 	else
 	{
 		SetViewLocation( EditorViewportDefs::DefaultPerspectiveViewLocation );
-		SetViewRotation( EditorViewportDefs::DefaultPerspectiveViewRotation );	
+		SetViewRotation( EditorViewportDefs::DefaultPerspectiveViewRotation );
 	}
 
 }

@@ -24,7 +24,7 @@ UObject* UCustomAssetFactory::FactoryCreateNew(UClass* Class, UObject* InParent,
 	UCustomMesh* Mesh = NewObject<UCustomMesh>(InParent, Class, Name, Flags | RF_Transactional);
 	if (StaticMesh)
 	{
-		Mesh->StaticMesh =Cast<UStaticMesh>(StaticMesh) ;
+		Mesh->SetStaticMesh(Cast<UStaticMesh>(StaticMesh));
 	}
 	else
 	{

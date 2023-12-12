@@ -15,10 +15,12 @@ class CUSTOMASSET_API UCustomMesh : public UObject
 	GENERATED_BODY()
 
 public:
+	//getters
+	class UStaticMesh* GetStaticMesh() const { return StaticMesh.Get(); }
+	//setters
+	void SetStaticMesh(class UStaticMesh* InStaticMesh) { StaticMesh = InStaticMesh; }
 
-
-
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="CustomMesh")
+private:
+	UPROPERTY(VisibleAnywhere, Category="CustomMesh", meta=(AllowedClasses="StaticMesh"))
 	TObjectPtr<class UStaticMesh> StaticMesh;
-	
 };

@@ -5,11 +5,11 @@
 
 #include "CustomMesh.h"
 #include "CustomMeshEditorToolKit.h"
-
-TSharedPtr<SWidget> FCustomMeshActionBase::GetThumbnailOverlay(const FAssetData& AssetData) const
-{
-	return SNew(SImage);
-}
+	
+// TSharedPtr<SWidget> FCustomMeshActionBase::GetThumbnailOverlay(const FAssetData& AssetData) const
+// {
+// 	return SNew(SImage).Image(FAppStyle::GetBrush("NoBrush"));
+// }
 
 FText FCustomMeshActionBase::GetName() const
 {

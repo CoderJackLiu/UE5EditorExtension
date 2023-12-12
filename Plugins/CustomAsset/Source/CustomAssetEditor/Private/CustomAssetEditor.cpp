@@ -1,6 +1,8 @@
 ﻿#include "CustomAssetEditor.h"
 
+#include "CustomMesh.h"
 #include "CustomMeshActionBase.h"
+#include "CustomMeshThumbnail.h"
 
 #define LOCTEXT_NAMESPACE "FCustomAssetEditorModule"
 
@@ -10,6 +12,10 @@ void FCustomAssetEditorModule::StartupModule()
 	EAssetTypeCategories::Type Category = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("YourCategory")), LOCTEXT("YourCategory", "YourCategory"));
 	Action = MakeShareable(new FCustomMeshActionBase());
 	AssetTools.RegisterAssetTypeActions(Action.ToSharedRef());
+
+
+	UThumbnailManager::Get().RegisterCustomRenderer(UCustomMesh::StaticClass(), UCustomMeshThumbnail::StaticClass());
+
 }
 
 void FCustomAssetEditorModule::ShutdownModule()
