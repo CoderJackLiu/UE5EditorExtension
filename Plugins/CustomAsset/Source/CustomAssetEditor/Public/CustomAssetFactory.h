@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "CustomAssetFactory.generated.h"
 
+class UCustomMeshSettings;
 /**
  * 
  */
@@ -42,10 +43,18 @@ public:
 	{
 		return Formats;
 	}
+
+	//get custom mesh settings
+	UCustomMeshSettings* GetCustomMeshSettings();
 	
+private:
 	//static mesh
 	UPROPERTY(Transient)
 	UObject* StaticMesh;
+
+	
+	UPROPERTY(Transient)
+	UCustomMeshSettings* CustomMeshSettings;
 	
 	static UFactory* GetFBXFactory() ;
 	static UFactory* GetFactoryInstanceByName(const FString& ClassName) ;

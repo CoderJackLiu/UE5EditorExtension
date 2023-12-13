@@ -4,6 +4,8 @@
 #include "CustomAssetFactory.h"
 
 #include "CustomMesh.h"
+#include "CustomMeshSettings.h"
+#include "ObjectTools.h"
 #include "Factories/SceneImportFactory.h"
 
 UCustomAssetFactory::UCustomAssetFactory(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
@@ -37,7 +39,12 @@ UObject* UCustomAssetFactory::ImportObject(UClass* InClass, UObject* InOuter, FN
 {
 	if (UFactory* Factory = GetFBXFactory())
 	{
-		StaticMesh = Factory->ImportObject(InClass, InOuter, InName, Flags, Filename, Parms, OutCanceled);
+		const FString DestinationPath = GetCustomMeshSettings()->GetStaticMeshImportPath();
+		const FString Name = FPaths::GetBaseFilename(Filename);
+		const FString PackageName = ObjectTools::SanitizeInvalidChars(FPaths::Combine(*DestinationPath, *Name), INVALID_LONGPACKAGE_CHARACTERS);
+		UPackage* Package = CreatePackage(*PackageName);
+		
+		StaticMesh = Factory->ImportObject(UStaticMesh::StaticClass(), Package, InName, Flags, Filename, Parms, OutCanceled);
 	}
 	//log
 	UE_LOG(LogTemp, Warning, TEXT("ImportObject : %s"), StaticMesh? TEXT("true"): TEXT("false"));
@@ -50,6 +57,15 @@ bool UCustomAssetFactory::FactoryCanImport(const FString& Filename)
 	//log
 	UE_LOG(LogTemp, Warning, TEXT("FactoryCanImport : %s"), bCanImport? TEXT("true"): TEXT("false"));
 	return bCanImport;
+}
+
+UCustomMeshSettings* UCustomAssetFactory::GetCustomMeshSettings() 
+{
+	if (!CustomMeshSettings)
+	{
+		CustomMeshSettings = GetMutableDefault<UCustomMeshSettings>();
+	}
+	return CustomMeshSettings;
 }
 
 UFactory* UCustomAssetFactory::GetFBXFactory()

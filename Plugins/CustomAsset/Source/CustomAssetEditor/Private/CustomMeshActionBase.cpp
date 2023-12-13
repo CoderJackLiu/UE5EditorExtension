@@ -8,34 +8,11 @@
 #include "CustomMeshEditorToolKit.h"
 #include "ThumbnailRendering/SceneThumbnailInfo.h"
 
-TSharedPtr<SWidget> FCustomMeshActionBase::GetThumbnailOverlay(const FAssetData& AssetData) const
-{
-	// FTextureRenderTargetResource* ThumbnailRTResource=nullptr;
-	//
-	// FThumbnailRenderingInfo* RenderingInfo = UThumbnailManager::Get().GetRenderingInfo(AssetData.GetAsset());
-	// if (RenderingInfo != nullptr)
-	// {
-	// 	if (RenderingInfo->Renderer)
-	// 	{
-	// 		// RenderingInfo->Renderer->Draw(AssetData.GetAsset(), 0, 0, 128, 128, nullptr, nullptr, false);
-	// 		// Re-render
-	// 		FCanvas ThumbnailCanvas(ThumbnailRTResource, nullptr, nullptr, ERHIFeatureLevel::Type::SM5, FCanvas::CDM_DeferDrawing, 1.0f);
-	// 		RenderingInfo->Renderer->Draw(AssetData.GetAsset(), 0, 0, 128, 128, ThumbnailRTResource, &ThumbnailCanvas, false);
-	// 		
-	// 		ENQUEUE_RENDER_COMMAND(TransitionThumbnail_RT)
-	// 		(
-	// 			[RenderTargetResource=ThumbnailRTResource](FRHICommandListImmediate& RHICmdList)
-	// 			{
-	// 				RHICmdList.Transition(FRHITransitionInfo(RenderTargetResource->GetRenderTargetTexture(), ERHIAccess::RTV, ERHIAccess::SRVMask));
-	// 			}
-	// 		);
-	// 		return SNew(SImage);//.Image(ThumbnailRTResource);
-	//
-	// 	}
-	// }
-	AssetData.GetAsset();
-	return SNew(SImage).Image(FAppStyle::GetBrush("NoBrush"));
-}
+// TSharedPtr<SWidget> FCustomMeshActionBase::GetThumbnailOverlay(const FAssetData& AssetData) const
+// {
+// 	AssetData.GetAsset();
+// 	return SNew(SImage).Image(FAppStyle::GetBrush("NoBrush"));
+// }
 
 EThumbnailPrimType FCustomMeshActionBase::GetDefaultThumbnailPrimitiveType(UObject* Asset) const
 {

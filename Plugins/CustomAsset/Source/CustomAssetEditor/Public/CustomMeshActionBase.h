@@ -14,7 +14,7 @@ class CUSTOMASSETEDITOR_API FCustomMeshActionBase : public FAssetTypeActions_Bas
 
 public:
 	// IAssetTypeActions Implementation
-	virtual TSharedPtr<class SWidget> GetThumbnailOverlay(const FAssetData& AssetData) const override;
+	// virtual TSharedPtr<class SWidget> GetThumbnailOverlay(const FAssetData& AssetData) const override;
 	virtual EThumbnailPrimType GetDefaultThumbnailPrimitiveType(UObject* Asset) const override;
 	virtual TArray<FAssetData> GetValidAssetsForPreviewOrEdit(TArrayView<const FAssetData> InAssetDatas, bool bIsPreview) override;
 
