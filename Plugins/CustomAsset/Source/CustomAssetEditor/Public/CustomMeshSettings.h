@@ -33,7 +33,7 @@ private:
 	FDirectoryPath StaticMeshImportPath;
 
 	//save after import success
-	UPROPERTY(EditAnywhere, config, Category="Path Settings", meta = (/*EditCondition="bUseModernXcode",*/ DisplayName = "FBX导入后保存",LongPackageName))
+	UPROPERTY(EditAnywhere, config, Category="Path Settings", meta = (/*EditCondition="bUseModernXcode",*/ DisplayName = "FBX导入后保存",LongPackageName,ConfigRestartRequired = true))
 	bool bSaveAfterImport;
 	
 };
