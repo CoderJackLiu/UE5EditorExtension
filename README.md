@@ -4,9 +4,22 @@
 This project is a collection of editor extension tools, aimed at enhancing the efficiency and automation of asset import and editor operations.
 
 ## Features
-- **CustomAssets Branch**: Offers custom FBX asset import, automatically serialized into CustomMesh UAsset. Includes creation menu page extension for generating CustomMesh assets, custom viewport, thumbnail rendering, and custom project settings (e.g., setting the save path for StaticMesh).
-- **EditorOperatorListener Branch**: Focuses on code organization and sharing. Demonstrates how to bind delegates to capture editor operations, including selecting actors under the viewport, changes in selected actors, selecting assets in Content, opening specific levels, etc.
-- **Master Branch**: Consolidates all branch features and displays the ReadMe document. Future updates will include collections of branches for specific engine versions.
+
+- **CustomAssets Branch**:
+  - Introduces an advanced custom FBX asset import tool, capable of automatically converting FBX files into CustomMesh UAssets.
+  - Includes an innovative menu page extension feature, enabling users to easily create CustomMesh assets.
+  - Features custom viewport and thumbnail rendering to enhance asset visualization.
+  - Offers flexible project settings options, such as custom save paths for StaticMesh.
+
+- **EditorOperatorListener Branch**:
+  - Focused on demonstrating how to optimize editor operations and code efficiency.
+  - Provides rich examples showing how to bind delegates to capture and respond to various editor actions, including selecting actors in the viewport, monitoring changes in selected actors, and managing assets in Content.
+  - Enables developers to gain a deeper understanding of the editor's internal mechanisms.
+
+- **Master Branch**:
+  - Acts as the hub of the project, consolidating and integrating features from all branches.
+  - Provides a comprehensive ReadMe, aiding new users in quickly getting started.
+  - Future updates will include consolidated features for specific Unreal Engine versions, facilitating developers in selecting the appropriate toolkit.
 
 ## How to Use
 1. **Install Unreal Engine 5.3**: Ensure that Unreal Engine 5.3 is installed on your system. You can download and install it from the [Unreal Engine Official Website](https://www.unrealengine.com/).
@@ -27,9 +40,23 @@ This project is licensed under the MIT License. For more details, see the [LICEN
 本项目是一个编辑器扩展工具集，旨在提高资产导入和编辑器操作的效率和自动化程度。
 
 ## 功能特点
-- **CustomAssets分支**: 提供自定义FBX资产导入功能，自动序列化为CustomMesh UAsset。包括创建菜单页扩展，用于生成CustomMesh资产，自定义视口和缩略图渲染，以及自定义项目设置（例如设置StaticMesh的保存路径）。
-- **EditorOperatorListener分支**: 专注于代码整理和分享。展示如何绑定代理以捕获编辑器操作，包括选中视口下的Actor，变化的选中Actor，选中Content中的资产，打开特定关卡等。
-- **Master分支**: 汇总所有分支功能，并展示ReadMe文档。未来将包括基于特定引擎版本的分支合集。
+
+- **CustomAssets分支**：
+    - 提供先进的自定义FBX资产导入工具，能够将FBX文件自动转换为CustomMesh UAsset。
+    - 包括一个创新的菜单页扩展功能，使用户能够轻松创建CustomMesh资产。
+    - 引入自定义视口和缩略图渲染功能，优化资产可视化。
+    - 包含灵活的项目设置选项，例如可自定义StaticMesh的保存路径。
+
+- **EditorOperatorListener分支**：
+    - 专注于展示如何优化编辑器操作和提高代码效率。
+    - 提供丰富的示例，展示如何绑定代理，捕获并响应编辑器内各种操作，包括选中视口下的Actor，监测选中Actor的变化，以及操作Content中的资产等。
+    - 能够让开发者更深入了解编辑器的内部工作机制。
+
+- **Master分支**：
+    - 作为项目的核心，汇总并整合所有分支的功能。
+    - 提供完整的ReadMe文件，使新用户能快速上手。
+    - 未来将包括针对特定虚幻引擎版本的功能整合，便于开发者选择适合的工具集。
+
 
 ## 如何使用
 1. **安装虚幻引擎5.3**：首先确保您的系统中安装了虚幻引擎5.3版本。您可以从[虚幻引擎官方网站](https://www.unrealengine.com/)下载并安装。
