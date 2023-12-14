@@ -1,7 +1,9 @@
 # UEPluginsDev
 
 ## Introduction
-This project is a collection of editor extension tools, aimed at enhancing the efficiency and automation of asset import and editor operations.
+
+This project is a collection of editor extension tools, aimed at extending the Unreal Engine to meet more personalized editor usage needs and gain a deeper understanding of the Unreal Engine editor source code. 
+The project has multiple branches, each containing different editor extension functions, allowing you to choose the appropriate branch according to your needs.
 
 ## Features
 
@@ -38,7 +40,7 @@ This project is licensed under the MIT License. For more details, see the [LICEN
 
 ## 简介
 
-本项目是一个编辑器扩展工具集，旨在提高资产导入和编辑器操作的效率和自动化程度。
+本项目是一个编辑器扩展工具集，旨在对虚幻引擎进行扩展以满足更加个性化的编辑器使用需求以及更深入了解虚幻引擎编辑器源码。本项目有多个分支，每个分支都包含不同的编辑器扩展功能，你可以根据自己的需求选择合适的分支。
 
 ## 功能特点
 
