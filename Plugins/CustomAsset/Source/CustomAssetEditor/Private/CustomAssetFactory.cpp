@@ -5,6 +5,7 @@
 
 #include "CustomMesh.h"
 #include "CustomMeshSettings.h"
+#include "FileHelpers.h"
 #include "ObjectTools.h"
 #include "Factories/SceneImportFactory.h"
 
@@ -43,12 +44,23 @@ UObject* UCustomAssetFactory::ImportObject(UClass* InClass, UObject* InOuter, FN
 		const FString Name = FPaths::GetBaseFilename(Filename);
 		const FString PackageName = ObjectTools::SanitizeInvalidChars(FPaths::Combine(*DestinationPath, *Name), INVALID_LONGPACKAGE_CHARACTERS);
 		UPackage* Package = CreatePackage(*PackageName);
-		
+
 		StaticMesh = Factory->ImportObject(UStaticMesh::StaticClass(), Package, InName, Flags, Filename, Parms, OutCanceled);
+		//log
+		UE_LOG(LogTemp, Warning, TEXT("ImportObject : %s"), StaticMesh? TEXT("true"): TEXT("false"));
+		UObject* MeshAsset = Super::ImportObject(InClass, InOuter, InName, Flags, Filename, Parms, OutCanceled);
+		if (GetCustomMeshSettings()->GetSaveAfterImport())
+		{
+			TArray<UPackage*> Packages;
+			Packages.Add(MeshAsset->GetPackage());
+			Packages.Add(StaticMesh->GetPackage());
+			UEditorLoadingAndSavingUtils::SavePackages(Packages, true);
+		}
+		return MeshAsset;
+
 	}
-	//log
-	UE_LOG(LogTemp, Warning, TEXT("ImportObject : %s"), StaticMesh? TEXT("true"): TEXT("false"));
-	return Super::ImportObject(InClass, InOuter, InName, Flags, Filename, Parms, OutCanceled);
+
+	return nullptr;
 }
 
 bool UCustomAssetFactory::FactoryCanImport(const FString& Filename)
@@ -59,7 +71,7 @@ bool UCustomAssetFactory::FactoryCanImport(const FString& Filename)
 	return bCanImport;
 }
 
-UCustomMeshSettings* UCustomAssetFactory::GetCustomMeshSettings() 
+UCustomMeshSettings* UCustomAssetFactory::GetCustomMeshSettings()
 {
 	if (!CustomMeshSettings)
 	{
