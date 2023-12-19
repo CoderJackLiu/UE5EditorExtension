@@ -4,42 +4,44 @@
 
 ## Introduction
 
-This project is a collection of editor extension tools, aimed at extending the Unreal Engine to meet more personalized editor usage requirements and to provide deeper insight into the Unreal Engine editor's source code. The project has multiple branches, each containing different editor extension functionalities, allowing you to choose the appropriate branch based on your needs.
+This project is a set of editor extension tools, designed to expand the Unreal Engine to meet more personalized editor usage needs and to deepen understanding of the Unreal Engine editor's source code. The project has several branches, each containing different editor extension features, allowing you to choose the appropriate branch according to your needs.
 
 ## Features
 
 - **Master Branch**:
-  - Serves as the core of the project, summarizing and integrating the functionalities of all branches.
-  - Provides a comprehensive ReadMe file, enabling new users to get started quickly.
-  - Future updates will include integrations for specific Unreal Engine versions, facilitating developers in selecting the suitable toolset.
+  - Serves as the core of the project, summarizing and integrating the features of all branches.
+  - Provides a complete ReadMe file, enabling new users to quickly get started.
+  - Future integration will include specific Unreal Engine version features, making it easier for developers to choose the right toolset.
 
 - **CustomAssets Branch**:
   - Offers advanced custom FBX asset import tools, capable of automatically converting FBX files into CustomMesh UAssets.
-  - Includes innovative menu page extension features, enabling users to easily create CustomMesh assets.
-  - Introduces custom viewport and thumbnail rendering features, optimizing asset visualization.
-  - Contains flexible project setting options, such as customizing the save path for StaticMesh.
+  - Includes an innovative menu page extension feature, allowing users to easily create CustomMesh assets.
+  - Introduces custom viewport and thumbnail rendering features to optimize asset visualization.
+  - Contains flexible project setting options, such as customizable paths for saving StaticMesh.
 
 - **EditorOperatorListener Branch**:
-  - Focuses on demonstrating how to optimize editor operations and enhance code efficiency.
-  - Provides rich examples, showing how to bind delegates, capture, and respond to various operations within the editor, including selecting Actors under the viewport, monitoring changes in selected Actors, and managing assets in the Content Browser.
-  - Allows developers to gain a deeper understanding of the editor's internal mechanisms.
+  - Focused on demonstrating how to optimize editor operations and improve code efficiency.
+  - Provides rich examples showing how to bind delegates, capture and respond to various operations within the editor, such as selecting actors in the viewport, monitoring changes in selected actors, and managing assets in the Content Browser.
+  - Allows developers to gain deeper insights into the internal workings of the editor.
 
-- **BluePrintEditorExtension Branch**:
-  - This branch is dedicated to demonstrating how to extend the Unreal Engine editor's functionality by creating blueprints.
-  - Users will learn how to create an `EditorUtilityWidget`, a UI script that runs directly within the editor, enhancing its interactivity and flexibility.
-  - Includes extensions for the `Content Browser` menu, allowing users to see new options when right-clicking on an Asset.
-  - Demonstrates how to extend the right-click menu in the `World Outliner` for individual or specific types of Actors, thus providing additional operations and tools.
-  - By extending the right-click menus of the Content Browser and World Outliner, this branch offers users more customizable operational options, making resource management and scene editing more efficient and intuitive.
+- **EditorOperatorListener Branch**:
+  - This branch is focused on demonstrating how to extend the functionality of the Unreal Engine editor by creating blueprints.
+  - Users will learn how to create an `EditorUtilityWidget`, a UI script that runs directly in the editor, enhancing its interactivity and flexibility.
+  - Includes extensions for the `Content Browser` menu, allowing users to see new options when right-clicking on an asset.
+  - Demonstrates how to extend the right-click menu in the `World Outliner` for individual or specific types of actors, providing additional operations and tools.
+  - By extending the right-click menus of the Content Browser and World Outliner, this branch provides users with more customizable operation options, making resource management and scene editing more efficient and intuitive.
 
-## Usage Instructions
+## How to Use
 
-Each branch is specifically developed and optimized for particular functionalities or purposes. Users can choose and contribute to the appropriate branch based on their needs.
+1. Environment Setup: Refer to [Installing Unreal Engine | Unreal Engine Documentation](https://docs.unrealengine.com/4.26/en-US/Basics/InstallingUnrealEngine/)
+2. Engine Version: 5.3.2
+3. Each branch is specifically developed and optimized for certain functionalities or purposes. Users can choose and contribute to the suitable branch based on their needs.
 
 ## Contribution Guidelines
 
-- Contributions enhancing or optimizing the functionalities of various branches are welcome. Please submit your improvements in the respective branch or propose suggestions and needs in the issues section.
-- Contributions can also be made directly via GitHub by creating a Pull Request. Ensure that your code is clear, commented, and tested before submission.
-- Feel free to contact me via WeChat (ID: 596770421) to join the project discussion and contribution.
+- Contributions to enhance or optimize the functionalities of various branches are welcome. Please submit your improvements in the respective branch or propose suggestions and requirements in the issues section.
+- Contributions can also be made directly via GitHub by initiating a Pull Request. Ensure your code is clear, commented, and tested before submission.
+- Feel free to contact me via WeChat (ID: 596770421) to join the project discussion and contribute.
 
 ## License
 
@@ -80,16 +82,11 @@ This project is licensed under the MIT License. For more information, please see
     - 展示了如何扩展世界大纲（`World Outliner`）中对单个或特定类型的Actor的右键菜单，从而提供额外的操作和工具。
     - 通过扩展内容浏览器和世界大纲的右键菜单，本分支为用户提供了更多定制化的操作选项，使得资源管理和场景编辑更为高效和直观。
 
-## 使用说明
-每个分支都针对特定的功能或用途进行了专门的开发和优化。用户可以根据自己的需求，选择合适的分支进行使用和贡献。
-
-## 贡献指南
-欢迎对各分支进行功能增强或优化的贡献。请在相应分支下提交您的改进方案，或在issues区提出建议和需求。
-
 
 ## 如何使用
-1. 参考：[Installing Unreal Engine | Unreal Engine Documentation](https://docs.unrealengine.com/4.26/en-US/Basics/InstallingUnrealEngine/)
+1. 环境安装：参考：[Installing Unreal Engine | Unreal Engine Documentation](https://docs.unrealengine.com/4.26/en-US/Basics/InstallingUnrealEngine/)
 1. 引擎版本：5.3.2
+1. 每个分支都针对特定的功能或用途进行了专门的开发和优化。用户可以根据自己的需求，选择合适的分支进行使用和贡献。
 
 ## 贡献指南
 - 欢迎对各分支进行功能增强或优化的贡献。请在相应分支下提交您的改进方案，或在issues区提出建议和需求。
