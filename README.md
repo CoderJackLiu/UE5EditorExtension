@@ -24,7 +24,7 @@ This project is a set of editor extension tools, designed to expand the Unreal E
   - Provides rich examples showing how to bind delegates, capture and respond to various operations within the editor, such as selecting actors in the viewport, monitoring changes in selected actors, and managing assets in the Content Browser.
   - Allows developers to gain deeper insights into the internal workings of the editor.
 
-- **EditorOperatorListener Branch**:
+- **BlueprintEditorExtension Branch**:
   - This branch is focused on demonstrating how to extend the functionality of the Unreal Engine editor by creating blueprints.
   - Users will learn how to create an `EditorUtilityWidget`, a UI script that runs directly in the editor, enhancing its interactivity and flexibility.
   - Includes extensions for the `Content Browser` menu, allowing users to see new options when right-clicking on an asset.
@@ -60,22 +60,18 @@ This project is licensed under the MIT License. For more information, please see
     - 作为项目的核心，汇总并整合所有分支的功能。
     - 提供完整的ReadMe文件，使新用户能快速上手。
     - 未来将包括针对特定虚幻引擎版本的功能整合，便于开发者选择适合的工具集。
-
 - **CustomAssets分支**：
 
     - 提供先进的自定义FBX资产导入工具，能够将FBX文件自动转换为CustomMesh UAsset。
     - 包括一个创新的菜单页扩展功能，使用户能够轻松创建CustomMesh资产。
     - 引入自定义视口和缩略图渲染功能，优化资产可视化。
     - 包含灵活的项目设置选项，例如可自定义StaticMesh的保存路径。
-
 - **EditorOperatorListener分支**：
 
     - 专注于展示如何优化编辑器操作和提高代码效率。
     - 提供丰富的示例，展示如何绑定代理，捕获并响应编辑器内各种操作，包括选中视口下的Actor，监测选中Actor的变化，以及操作Content中的资产等。
     - 能够让开发者更深入了解编辑器的内部工作机制。
-
-- ### EditorOperatorListener分支
-
+- **BlueprintEditorExtension Branch**:
     - 本分支专注于演示如何在虚幻引擎编辑器中通过创建蓝图扩展编辑器的功能。
     - 用户将学习如何创建一个 `EditorUtilityWidget`，这是一个在编辑器中直接运行的UI脚本，增强了编辑器的交互性和灵活性。
     - 包含对内容浏览器（`Content Browser`）的菜单栏的扩展，允许用户在右键点击资产（`Asset`）时看到新增的选项。
